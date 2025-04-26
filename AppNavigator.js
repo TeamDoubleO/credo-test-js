@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import MyPage from './pages/MyPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import MainPage from './pages/MainPage';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ export default function AppNavigator() {
         <Stack.Screen name="WelcomePage" component={WelcomePage} options={{ headerShown: false }} />
         <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
         <Stack.Screen name="SignUpPage" component={SignUpPage} options={{ headerShown: false }} />
+        <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
         <Stack.Screen name="MyPage" component={MyPage} options={{ headerShown: false }} />
         <Stack.Screen
           name="ChangePasswordPage"
