@@ -1,4 +1,4 @@
-import { View, Text, Modal, StatusBar } from 'react-native';
+import { View, Text, Modal } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from './styles/PasswordConfirmModal.styles';
 import NormalInput from '../components/common/textinput/NormalInput';
@@ -22,7 +22,7 @@ const PasswordConfirmModal = ({ visible = true, onCloseHandler }) => {
   };
 
   return (
-    <Modal visible={visible} transparent={true}>
+    <Modal visible={visible}>
       <KeyboardAwareScrollView
         contentContainerStyle={styles.scrollView}
         keyboardShouldPersistTaps="handled" //입력 도중 입력창 외 다른 부분을 터치 했을 때 내려감
