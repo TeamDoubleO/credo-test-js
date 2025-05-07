@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'; // 아이콘 라이브러리
 import { styles } from './styles/HomeButton.styles';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../../../constants/colors';
+import { colors } from '../../constants/colors';
 
 const HomeButton = () => {
   const navigation = useNavigation();
