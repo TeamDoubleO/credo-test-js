@@ -7,12 +7,16 @@ import { colors } from '../../constants/colors';
 const HomeButton = () => {
   const navigation = useNavigation();
 
+  // 기존 스택 삭제되도록 설정
+  const navigateToHome = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainPage' }],
+    });
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.homeButton}
-      onPress={() => navigation.navigate('MainPage')}
-      activeOpacity={0.8}
-    >
+    <TouchableOpacity style={styles.homeButton} onPress={navigateToHome} activeOpacity={0.8}>
       <Ionicons name="home" size={24} color={colors.tertiary} style={styles.icon} />
     </TouchableOpacity>
   );
