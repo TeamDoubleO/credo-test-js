@@ -43,6 +43,7 @@ const SignUpPage = () => {
   // Alert 관리 상태변수
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [errorAlertMessage, setErrorAlertMessage] = useState('');
 
   //상태 변수
   const [form, setForm] = useState({
@@ -111,9 +112,17 @@ const SignUpPage = () => {
       await createMemberInfo(form);
       setShowSuccessAlert(true); // Alert 상태변수 값 변경
     } catch (error) {
-      console.error('회원가입 실패:', error);
+      const status = error.response.data.status;
+      let message = '회원가입에 실패했습니다.';
+
+      if (status === 400) {
+        message = `입력 정보 확인 후\n다시 가입해 주세요.`;
+      } else if (status === 409) {
+        message = `이미 가입된 계정입니다.`;
+      }
+
+      setErrorAlertMessage(message);
       setShowErrorAlert(true);
-      throw error;
     } finally {
       setLoading(false);
     }
@@ -124,7 +133,7 @@ const SignUpPage = () => {
     navigation.navigate('LoginPage');
   };
 
-  // Alert 창 확인 버튼 클릭 핸들러러
+  // Alert 창 확인 버튼 클릭 핸들러
   const handleAlertConfirm = () => {
     setShowSuccessAlert(false);
 
@@ -215,7 +224,7 @@ const SignUpPage = () => {
       <NormalAlert
         show={showErrorAlert}
         title="회원가입 실패"
-        message={`회원가입에 실패했습니다.\n다시 시도해주세요.`}
+        message={errorAlertMessage}
         onConfirmHandler={() => setShowErrorAlert(false)}
       />
     </>

@@ -78,9 +78,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
         setShowErrorAlert(true);
       }
     } catch (error) {
-      console.error('로그인 실패:', error);
       setShowErrorAlert(true);
-      throw error;
     } finally {
       setLoading(false);
     }
