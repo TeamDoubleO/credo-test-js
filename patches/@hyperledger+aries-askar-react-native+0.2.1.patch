@@ -1,18 +1,20 @@
 diff --git a/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt b/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
-index 74b6aff..1d6beaa 100644
+index 74b6aff..db02c5b 100644
 --- a/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
 +++ b/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
-@@ -1,25 +1,5 @@
+@@ -1,25 +1,10 @@
 -project(ariesaskarreactnative)
--cmake_minimum_required(VERSION 3.4.1)
--
+ cmake_minimum_required(VERSION 3.4.1)
++project(ariesaskarreactnative)
+ 
 -set (PACKAGE_NAME "ariesaskarreactnative")
 -set (LIB_NAME "ariesaskar")
 -file (GLOB LIBASKAR_DIR "${CMAKE_SOURCE_DIR}/../native/mobile/android/${ANDROID_ABI}")
 -
 -set(CMAKE_VERBOSE_MAKEFILE ON)
 -set(CMAKE_CXX_STANDARD 14)
--
++set(PACKAGE_NAME "ariesaskarreactnative")
+ 
 -set (BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
 -if(${REACT_NATIVE_VERSION} GREATER_EQUAL 71)
 -  find_package(fbjni REQUIRED CONFIG)
@@ -25,12 +27,12 @@ index 74b6aff..1d6beaa 100644
 -  set (INCLUDE_JSI_CPP "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/jsi.cpp")
 -  set (INCLUDE_JSIDYNAMIC_CPP "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/JSIDynamic.cpp")
 -endif()
-+find_package(fbjni REQUIRED CONFIG)
-+find_package(ReactAndroid REQUIRED CONFIG)
++# 실제 라이브러리(.so) 경로
++set(LIBASKAR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../native/mobile/android/${ANDROID_ABI}")
  
  include_directories(
    ../cpp
-@@ -36,10 +16,10 @@ add_library(
+@@ -36,10 +21,9 @@ add_library(
    ../cpp/ariesAskar.cpp
  )
  
@@ -38,14 +40,13 @@ index 74b6aff..1d6beaa 100644
 -  target_include_directories(
 -    ${PACKAGE_NAME}
 -    PRIVATE
-+# include dirs for RN 0.71+
 +target_include_directories(
 +  ${PACKAGE_NAME}
 +  PRIVATE
      "${NODE_MODULES_DIR}/react-native/ReactAndroid/src/main/jni/react/turbomodule"
      "${NODE_MODULES_DIR}/react-native/ReactCommon"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/callinvoker"
-@@ -47,70 +27,12 @@ if(${REACT_NATIVE_VERSION} GREATER_EQUAL 71)
+@@ -47,70 +31,12 @@ if(${REACT_NATIVE_VERSION} GREATER_EQUAL 71)
      "${NODE_MODULES_DIR}/react-native/ReactCommon/react/renderer/graphics/platform/cxx"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/runtimeexecutor"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/yoga"
@@ -114,13 +115,13 @@ index 74b6aff..1d6beaa 100644
 -  REANIMATED_LIB
 -  reanimated
 -  PATHS ${LIBREANIMATED_DIR}
-+  ASKAR_LIB 
-+  aries_askar 
-+  PATHS ${LIBASKAR_DIR}
++  ASKAR_LIB
++  libaries_askar
++  PATHS "${LIBASKAR_DIR}"
    NO_CMAKE_FIND_ROOT_PATH
  )
  
-@@ -119,24 +41,17 @@ find_library(
+@@ -119,14 +45,6 @@ find_library(
    log
  )
  
@@ -135,8 +136,7 @@ index 74b6aff..1d6beaa 100644
  if (NOT ASKAR_LIB)
    message(FATAL_ERROR "Could not find ASKAR_LIB at: ${LIBASKAR_DIR}")
  endif()
- 
-+# 🔥 여기서 ReactNative::reactnative 만 사용!
+@@ -134,9 +52,9 @@ endif()
  target_link_libraries(
    ${PACKAGE_NAME}
    ${ASKAR_LIB}
@@ -149,7 +149,6 @@ index 74b6aff..1d6beaa 100644
 -  ${FBJNI_LIB}
    android
  )
-\ No newline at end of file
 diff --git a/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle b/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle
 index 2cc06db..9f90d95 100644
 --- a/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle
