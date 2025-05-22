@@ -1,0 +1,13 @@
+diff --git a/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle b/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle
+index 2cc06db..9f90d95 100644
+--- a/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle
++++ b/node_modules/@hyperledger/aries-askar-react-native/android/build.gradle
+@@ -81,7 +81,7 @@ android {
+   }
+   
+   defaultConfig {
+-    minSdkVersion 21 
++    minSdkVersion 24
+     targetSdkVersion getExt('targetSdkVersion')
+     
+     externalNativeBuild {
