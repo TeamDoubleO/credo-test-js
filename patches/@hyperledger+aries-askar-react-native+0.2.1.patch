@@ -1,8 +1,8 @@
 diff --git a/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt b/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
-index 74b6aff..db02c5b 100644
+index 74b6aff..a2b9842 100644
 --- a/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
 +++ b/node_modules/@hyperledger/aries-askar-react-native/android/CMakeLists.txt
-@@ -1,25 +1,10 @@
+@@ -1,25 +1,9 @@
 -project(ariesaskarreactnative)
  cmake_minimum_required(VERSION 3.4.1)
 +project(ariesaskarreactnative)
@@ -27,12 +27,11 @@ index 74b6aff..db02c5b 100644
 -  set (INCLUDE_JSI_CPP "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/jsi.cpp")
 -  set (INCLUDE_JSIDYNAMIC_CPP "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi/jsi/JSIDynamic.cpp")
 -endif()
-+# 실제 라이브러리(.so) 경로
 +set(LIBASKAR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../native/mobile/android/${ANDROID_ABI}")
  
  include_directories(
    ../cpp
-@@ -36,10 +21,9 @@ add_library(
+@@ -36,10 +20,9 @@ add_library(
    ../cpp/ariesAskar.cpp
  )
  
@@ -46,7 +45,7 @@ index 74b6aff..db02c5b 100644
      "${NODE_MODULES_DIR}/react-native/ReactAndroid/src/main/jni/react/turbomodule"
      "${NODE_MODULES_DIR}/react-native/ReactCommon"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/callinvoker"
-@@ -47,70 +31,12 @@ if(${REACT_NATIVE_VERSION} GREATER_EQUAL 71)
+@@ -47,70 +30,12 @@ if(${REACT_NATIVE_VERSION} GREATER_EQUAL 71)
      "${NODE_MODULES_DIR}/react-native/ReactCommon/react/renderer/graphics/platform/cxx"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/runtimeexecutor"
      "${NODE_MODULES_DIR}/react-native/ReactCommon/yoga"
@@ -116,12 +115,12 @@ index 74b6aff..db02c5b 100644
 -  reanimated
 -  PATHS ${LIBREANIMATED_DIR}
 +  ASKAR_LIB
-+  libaries_askar
++  aries_askar        # 여기서 "aries_askar"로만 입력 (libaries_askar.so 파일을 찾음)
 +  PATHS "${LIBASKAR_DIR}"
    NO_CMAKE_FIND_ROOT_PATH
  )
  
-@@ -119,14 +45,6 @@ find_library(
+@@ -119,14 +44,6 @@ find_library(
    log
  )
  
@@ -136,7 +135,7 @@ index 74b6aff..db02c5b 100644
  if (NOT ASKAR_LIB)
    message(FATAL_ERROR "Could not find ASKAR_LIB at: ${LIBASKAR_DIR}")
  endif()
-@@ -134,9 +52,9 @@ endif()
+@@ -134,9 +51,9 @@ endif()
  target_link_libraries(
    ${PACKAGE_NAME}
    ${ASKAR_LIB}
