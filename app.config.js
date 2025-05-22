@@ -17,7 +17,7 @@ export default {
     },
     android: {
       package: 'com.zzzzzisu.keyweapp',
-      minSdkVersion: 24,
+      //minSdkVersion: 24,
       adaptiveIcon: {
         foregroundImage: './assets/images/logoIcon.png',
         backgroundColor: '#ffffff',
