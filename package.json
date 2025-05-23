@@ -10,8 +10,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "@credo-ts/anoncreds": "0.5.3",
+    "@credo-ts/askar": "0.5.15",
+    "@credo-ts/core": "0.5.15",
+    "@credo-ts/react-native": "0.5.15",
+    "@hyperledger/anoncreds-react-native": "0.2.2",
+    "@hyperledger/aries-askar-react-native": "0.2.1",
+    "@hyperledger/aries-askar-shared": "0.2.1",
     "react": "18.2.0",
-    "react-native": "0.71.4"
+    "react-native": "0.71.4",
+    "react-native-ble-plx": "3.5.0",
+    "react-native-fs": "2.20.0",
+    "react-native-get-random-values": "1.11.0",
+    "react-native-quick-crypto": "0.7.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -33,5 +44,5 @@
   "jest": {
     "preset": "react-native"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@1.22.22"
 }
